@@ -14,7 +14,7 @@ public interface LikeRelationRepository extends GraphRepository<LikeRelation>{
 	 * @param relationName
 	 * @return
 	 */
-	@Query("match p = (n)-[r:Like]->(b) return p")
+	@Query("match p = (n)-[r:Like]-(b) return p")
 	List<LikeRelation> getLikes();
 	
 	

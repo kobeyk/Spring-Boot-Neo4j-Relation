@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
+
+import com.appleyk.relation.LikeRelation;
 
 @NodeEntity
 public class User extends BaseNode{
@@ -27,10 +30,18 @@ public class User extends BaseNode{
 	 * 兴趣爱好
 	 */
 	private List<String> hobbies;
+	
+	/**
+	 * 添加关系喜欢，方向为  ->，表明当前节点是startNode
+	 */
+	@Relationship(type="Like",direction = Relationship.OUTGOING)
+	private List<LikeRelation> likes;
+	
 
 	
 	public User(){
 		hobbies = new ArrayList<>();
+		likes = new ArrayList<>();
 	}
 	
 	public Long getUid() {
@@ -69,4 +80,8 @@ public class User extends BaseNode{
 		hobbies.add(hobby);
 	}
 		
+	public void addLikes(User user,String reason,Integer since,Integer relationID){
+		LikeRelation like = new LikeRelation(this, user, reason, since, relationID);
+		this.likes.add(like);
+	}
 }

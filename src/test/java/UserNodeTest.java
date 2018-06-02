@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.appleyk.Application;
 import com.appleyk.node.User;
+import com.appleyk.relation.LikeRelation;
 import com.appleyk.repository.UserRepository;
 
 
@@ -52,6 +53,46 @@ public class UserNodeTest {
 		for (User user : iterable) {
 			System.out.println("创建节点：【"+user.getName()+"】成功！");
 		}
+		
+	}
+	
+	/**
+	 * 创建节点  == 内置关系
+	 */
+	@Test
+	public void createNodeandRelation(){
+			
+		User startNode = new User();
+		startNode.setUid(1011L);
+		startNode.setName("刘泽");
+		startNode.setAge(22);
+		startNode.setSex("男");
+		startNode.addHobby("游戏");
+		startNode.addHobby("睡觉");
+		
+		User endNode1 = new User();
+		endNode1.setUid(1012L);
+		endNode1.setName("张婷");
+		endNode1.setAge(17);
+		endNode1.setSex("女");
+		endNode1.addHobby("逛街");
+		endNode1.addHobby("美食");
+		endNode1.addHobby("化妆");
+		
+		User endNode2 = new User();
+		endNode2.setUid(1013L);
+		endNode2.setName("林志玲");
+		endNode2.setAge(45);
+		endNode2.setSex("女");
+		endNode2.addHobby("逛街");
+		endNode2.addHobby("美食");
+		endNode2.addHobby("化妆");
+		
+		startNode.addLikes(endNode1, "心地善良，人美", 2015,521 );
+		startNode.addLikes(endNode2, "女神姐姐", 2011, 520);
+		
+		User userNode = userRepository.save(startNode);
+		System.out.println("节点"+userNode.getName()+"创建成功！");
 		
 	}
 	

@@ -28,6 +28,7 @@ public class LikeRelation {
 	@EndNode
 	private BaseNode endNode;
 
+		
 	/**
 	 * 定义关系的属性
 	 */
@@ -40,6 +41,15 @@ public class LikeRelation {
 	private Integer relationID;
 
 	public LikeRelation() {
+	}
+	
+	public LikeRelation(BaseNode startNode,BaseNode endNode,String reason,
+			Integer since,Integer relationID){
+		this.startNode = startNode;
+		this.endNode = endNode;
+		this.reason = reason;
+		this.since = since;
+		this.relationID = relationID;
 	}
 
 	public Long getId() {
